@@ -1,4 +1,4 @@
-This files describes the contents and organization of the 'scripts' folder.
+The following describes the contents and organization of the 'scripts' folder.
 
 <h2> 01_Preprocessing </h2>
 
