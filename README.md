@@ -35,6 +35,7 @@ This files describes the contents and organization of the 'scripts' folder.
 <li> ‘04a_RunClustering_alpha.m’ and ‘04b_RunClustering_beta.m’, runs cluster-based permutation analysis for alpha and beta power data; option to plot topos</li>
 
 <li> ‘05_RunCorrelations.py’, runs correlations across trials between alpha power and SCP dv, beta power and SCP dv, alpha power and beta power; computes the AUROC scores for alpha vs beta and their residuals.</li>
+</ol>
 
 <li> High-Level dataset (HL) </li>
 <ol>
