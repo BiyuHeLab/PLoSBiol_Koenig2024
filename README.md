@@ -39,7 +39,7 @@ The following describes the contents and organization of the 'scripts' folder.
 
 <li> High-Level dataset (HL) </li>
 <ol>
-<li> ‘01a_RunWavelet_RunFooof.py’, extracts power spectra from wavelet, and with run_fooof(subject, use_400 = True) runs the fooof algorithm on 100 ms temporal resolution power spectra that are first averaged into the 400 ms time windows of interest in the pre-stimulus interval. Writes AUC power for each subject. The first time this script is run in its entirety, also need to run lines 164 onwards, which ensure that all subjects have the same number of sensors (272). </li>
+<li> ‘01a_RunWavelet_RunFooof.py’, extracts power spectra from wavelet, and with run_fooof(subject, use_400 = True) runs the fooof algorithm on 100 ms temporal resolution power spectra that are first averaged into the 400 ms time windows of interest in the pre-stimulus interval. Writes AUC power for each subject. </li>
 
 <li> ‘01b_RunWavelet_RunFooof_scrambled.py’, same as above but for scrambled trials </li>
 
