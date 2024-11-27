@@ -1,25 +1,26 @@
 This files corresponds to the contents and organization of the 'scripts' folder.
 
-1) 01_Preprocessing
+<h2> 01_Preprocessing </h2>
 
-  A) Low-Level dataset (LL)
+<ol> <li> Low-Level dataset (LL) </li>
 
-    - ‘epochtfr_allsubs.m’, concatenates raw MEG data across blocks by trial type (seen or unseen), filtered to full band or SCP band for all subjects; writes concatenated preprocessed file for each subject
+<ol>
+<li> ‘epochtfr_allsubs.m’, concatenates raw MEG data across blocks by trial type (seen or unseen), filtered to full band or SCP band for all subjects; writes concatenated preprocessed file for each subject </li>
 
-    - ‘epoching_prestim_2sec.m’, epochs data from -2 to + 3 s around stimulus onset, selects trials of interest for the analysis.
+<li> ‘epoching_prestim_2sec.m’, epochs data from -2 to + 3 s around stimulus onset, selects trials of interest for the analysis. </li>
 
-    - ‘epoching_prestim_SCP.m’ does the same as b) for the SCP band for real and catch trials.
+<li> ‘epoching_prestim_SCP.m’ does the same as b) for the SCP band for real and catch trials. </li>
+</ol>
 
+<li> High-Level dataset (HL) </li>
+<ol>
+<li> ‘HLTP_eye_tracker.py’, reads in eyetracking data and identifies blinks; tags trials with a blink for removal from MEG data analysis </li>
 
-  B) High-Level dataset (HL)
+<li> ‘HLTP_main_preproc.py’, reads in raw data, runs ICA, rejects data based on ICA, runs filtering on clean data </li>
 
-    - ‘HLTP_eye_tracker.py’, reads in eyetracking data and identifies blinks; tags trials with a blink for removal from MEG data analysis
-
-    - ‘HLTP_main_preproc.py’, reads in raw data, runs ICA, rejects data based on ICA, runs filtering on clean data
-
-    - ‘HLTP_make_epochs.py’, reads in cleaned and preprocessed data, rejects trials based on eyetracking data, then saves epoched data from -2 to +2 s around stimulus onset, selects trials of interest for the analysis.
-
-
+<li> ‘HLTP_make_epochs.py’, reads in cleaned and preprocessed data, rejects trials based on eyetracking data, then saves epoched data from -2 to +2 s around stimulus onset, selects trials of interest for the analysis. </li>
+</ol>
+</ol>
 
 2) 02_Analysis
 
