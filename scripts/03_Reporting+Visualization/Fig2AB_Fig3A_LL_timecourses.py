@@ -100,6 +100,10 @@ for i in range(len(DV_time[0,:,0])):
     paired_sem.append(SEM_within_subject(DV_time[:,i,:]))
 paired_sem = np.array(paired_sem)[:,0]
 
+#Save to csv
+df = pd.DataFrame({"DV_seen":DVs_mean[:,0], "DV_unseen": DVs_mean[:,1], "paired_sem": paired_sem, "time (s)": times})
+df.to_csv(data_dir + "Fig2A.csv",index=False)
+
 #PLOT
 plt.clf()
 fig, ax = plt.subplots(1, 1, figsize = (4, 2))
@@ -131,6 +135,7 @@ plt.xlim([-1.7,1.5])
 plt.legend(loc='upper right',frameon=False,bbox_to_anchor=[1.1, 1.1],labelspacing = 0.1,fontsize=12)
 plt.savefig("../figures/Fig2A.png",transparent=True,bbox_inches='tight', dpi=150)
 
+
 #Plot timecourses of power 
 timecourse_alpha = np.zeros((nSubs,2,9,3)) #subjects x (seen,unseen) x timepoints x (sensors of alpha cluster #1, sensors of beta clusters #1, #2)
 timecourse_beta = np.zeros((nSubs,2,9,3)) #subjects  x (seen,unseen) x timepoints x (sensors of alpha cluster #1, sensors of beta clusters #1, #2)
@@ -159,6 +164,16 @@ names = ['alpha cluster # 1','beta cluster #1', 'beta cluster # 2']
 savenames = ['Fig2B_timecourse','Fig3A_1_timecourse','Fig3A_2_timecourse']
 times = np.round(np.arange(-1.7,1.8,0.1),1)[0::4] # 400 ms intervals
 times_of_significance = np.array([0,0,0]) #time intervals at which each cluster was significant
+
+# Save to csv
+df1 = pd.DataFrame({"alpha_seen":mean_alpha_time[0,:,0], "alpha_unseen": mean_alpha_time[1,:,0], "time (s)": times})
+df1.to_csv(data_dir + "Fig2B.csv",index=False)
+
+df2 = pd.DataFrame({"beta_seen":mean_beta_time[0,:,1], "beta_unseen": mean_beta_time[1,:,1], "time (s)": times})
+df2.to_csv(data_dir + "Fig3A_1.csv",index=False)
+
+df3 = pd.DataFrame({"beta_seen":mean_beta_time[0,:,2], "beta_unseen": mean_beta_time[1,:,2], "time (s)": times})
+df3.to_csv(data_dir + "Fig3A_2.csv",index=False)
 
 for k, sensors_of_interest in enumerate(all_sensors):
     plt.clf()

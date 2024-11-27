@@ -101,6 +101,10 @@ for i in range(len(timecourse_DVs[0,0,3:])):
 paired_sem = np.array(paired_sem)[:,0]
 times = np.round(np.arange(-1.7,1.5,0.1),1) # 100 ms intervals
 
+#Save to csv
+df = pd.DataFrame({"DV_rec":mean_timecourse_DVs[0,:], "DV_unrec": mean_timecourse_DVs[1,:], "paired_sem": paired_sem, "time (s)": times})
+df.to_csv(data_dir + "Fig2D.csv",index=False)
+
 #PLOT
 plt.clf()
 fig, ax = plt.subplots(1, 1, figsize = (4, 2))
@@ -148,6 +152,19 @@ times_of_significance = np.array([1,3,2,3]) #time intervals at which each cluste
 
 plot_combinations = [(0, 0), (0, 1), (1, 2), (1, 3)]
 savenames = ['Fig2E_1_timecourse','Fig2E_2_timecourse','Fig3C_1_timecourse','Fig3C_2_timecourse']
+
+# Save to csv
+df1 = pd.DataFrame({"alpha_seen":mean_alpha_time[0,:,0], "alpha_unseen": mean_alpha_time[1,:,0], "time (s)": times})
+df1.to_csv(data_dir + savenames[0] + ".csv",index=False)
+
+df2 = pd.DataFrame({"beta_seen":mean_alpha_time[0,:,1], "beta_unseen": mean_alpha_time[1,:,1], "time (s)": times})
+df2.to_csv(data_dir + savenames[1] + ".csv",index=False)
+
+df3 = pd.DataFrame({"beta_seen":mean_beta_time[0,:,2], "beta_unseen": mean_beta_time[1,:,2], "time (s)": times})
+df3.to_csv(data_dir + savenames[2] + ".csv",index=False)
+
+df4 = pd.DataFrame({"beta_seen":mean_beta_time[0,:,3], "beta_unseen": mean_beta_time[1,:,3], "time (s)": times})
+df4.to_csv(data_dir + savenames[3] + ".csv",index=False)
 
 for a, k in plot_combinations:
     plt.clf()

@@ -86,6 +86,10 @@ colors = {'AlphaC1_high':np.array([164, 210, 255]) / 255.,
 
 #Plot alpha vs. pupil
 data = [corr_alpha_pupil_z[0,:],corr_alpha_pupil_z[1,:]]
+df = pd.DataFrame(data).transpose()
+df.columns = ["alphac1_pupil","alphac2_pupil"]
+df.to_csv(data_dir + "Fig6A.csv", index = False)
+
 fig, ax = plt.subplots(1, 1, figsize = (3, 2.5))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
@@ -127,6 +131,10 @@ plt.clf()
 
 #Plot beta vs. pupil
 data = [corr_beta_pupil_z[0,:],corr_beta_pupil_z[1,:]]
+df = pd.DataFrame(data).transpose()
+df.columns = ["betac1_pupil","betac2_pupil"]
+df.to_csv(data_dir + "Fig6B.csv", index = False)
+
 fig, ax = plt.subplots(1, 1, figsize = (3, 2.5))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
@@ -168,6 +176,10 @@ plt.clf()
 
 #SCP vs. pupil
 data = [corr_SCP_pupil_z]
+df = pd.DataFrame(data).transpose()
+df.columns = ["SCP_pupil"]
+df.to_csv(data_dir + "Fig6C.csv", index = False)
+
 fig, ax = plt.subplots(1, 1, figsize = (1.5, 2.5))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)

@@ -90,6 +90,11 @@ import matplotlib.cm as cm
 colors = cm.Paired(np.linspace(0, 0.9, len(ys)))
 
 names = ['Fig2F_1_scatter','Fig2F_2_scatter','Fig3D_1_scatter','Fig3D_2_scatter']
+df_1 = pd.DataFrame(columns=['subjID', 'alpha_norm', 'SCPdv'])
+df_2 = pd.DataFrame(columns=['subjID', 'alpha_norm', 'SCPdv'])
+df_3 = pd.DataFrame(columns=['subjID', 'beta_norm', 'SCPdv'])
+df_4 = pd.DataFrame(columns=['subjID', 'beta_norm', 'SCPdv'])
+
 for cluster in range(len(all_clusters)):
     fig, ax = plt.subplots(1, 1, figsize = (4, 2))
     ax.spines['top'].set_visible(False)
@@ -107,11 +112,19 @@ for cluster in range(len(all_clusters)):
             plt.xlabel("normalized alpha power",fontsize=13)
             name = "alpha_vs_SCP_scatter_realtrials_c" + str(cluster+1)
             z = np.polyfit(df_all['alpha_norm'],df_all['SCPdv'],1)
+            if cluster == 0:
+                df_1 = pd.concat([df_1,df_clean[['subjID','alpha_norm','SCPdv']]])
+            elif cluster == 1:
+                df_2 = pd.concat([df_2,df_clean[['subjID','alpha_norm','SCPdv']]])
         else: #Beta clusters
             plt.scatter(df_clean['beta_norm'],df_clean['SCPdv'],alpha=0.7,linewidth=0.05,color=colors[s],s=20)
             plt.xlabel("normalized beta power",fontsize=13)
             name = "beta_vs_SCP_scatter_realtrials_c" + str(cluster-1)
             z = np.polyfit(df_all['beta_norm'],df_all['SCPdv'],1)
+            if cluster == 2:
+                df_3 = pd.concat([df_3,df_clean[['subjID','beta_norm','SCPdv']]])
+            elif cluster == 3:
+                df_4 = pd.concat([df_4,df_clean[['subjID','beta_norm','SCPdv']]])
     plt.xlim(0,maxXlim)
     p = np.polyval(z,x_extended)
     plt.plot(x_extended,p,color='black',linewidth=2)
@@ -120,6 +133,12 @@ for cluster in range(len(all_clusters)):
     plt.yticks(fontsize=12)
     plt.savefig(figures_dir + names[cluster] + ".png",dpi=800, bbox_inches='tight',transparent=True)
     plt.clf()
+
+#Save CSVs
+df_1.to_csv(data_dir + names[0] + '.csv', index=False)
+df_2.to_csv(data_dir + names[1] + '.csv', index=False)
+df_3.to_csv(data_dir + names[2] + '.csv', index=False)
+df_4.to_csv(data_dir + names[3] + '.csv', index=False)
 
 box_style=dict(boxstyle='round', facecolor='wheat', alpha=0.5)
 
@@ -134,6 +153,10 @@ colors = {'AlphaC1_high':np.array([164, 210, 255]) / 255.,
 
 # Alpha clusters
 data = [cluster_corr_z[0,:,0],cluster_corr_z[1,:,0]]
+df = pd.DataFrame(data).transpose()
+df.columns = ["alpha_SCP_c1","alpha_SCP_c2"]
+df.to_csv(data_dir + "Fig2F_box.csv", index = False)
+
 fig, ax = plt.subplots(1, 1, figsize = (3, 2.5))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
@@ -177,6 +200,10 @@ plt.clf()
     
 # Beta clusters
 data = [cluster_corr_z[2,:,1],cluster_corr_z[3,:,1]]
+df = pd.DataFrame(data).transpose()
+df.columns = ["beta_SCP_c1","beta_SCP_c2"]
+df.to_csv(data_dir + "Fig3D_box.csv", index = False)
+
 fig, ax = plt.subplots(1, 1, figsize = (3, 2.5))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)

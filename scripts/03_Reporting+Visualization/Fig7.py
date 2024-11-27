@@ -156,6 +156,10 @@ for cluster in range(2):
     
     fig, ax = plt.subplots(1, 1, figsize = (6, 2.5))
     data = np.array([np.delete(a_all[:,cluster],16),np.delete(b_all[:,cluster],16),np.delete(c_all[:,cluster],16),np.delete(d_all[:,cluster],16),np.delete(e_all[:,cluster],16),np.delete(f_all[:,cluster],16)])
+    df = pd.DataFrame(data).transpose()
+    df.columns = ["a","b","c","d","e","f"]
+    df.to_csv(data_dir + names[cluster] + ".csv", index = False)
+
     ax.spines['left'].set_position(('outward', 10))
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -372,10 +376,6 @@ for s, sub in enumerate(HLTP.subjects):
         
 scores = np.array([r2_a,r2_b,auc_c,auc_d,auc_e, auc_f])
 mean_scores_beta = np.nanmean(scores,axis=1)
-
-np.savetxt('../figures/beta_mediation_scores_c1.csv', np.column_stack((a_all[~np.isnan(a_all[:,0]),0],b_all[~np.isnan(b_all[:,0]),0],c_all[~np.isnan(c_all[:,0]),0],d_all[~np.isnan(d_all[:,0]),0],e_all[~np.isnan(e_all[:,0]),0],f_all[~np.isnan(f_all[:,0]),0])), delimiter=',', header='Value', comments='')
-np.savetxt('../figures/beta_mediation_scores_c2.csv', np.column_stack((a_all[~np.isnan(a_all[:,1]),1],b_all[~np.isnan(b_all[:,1]),1],c_all[~np.isnan(c_all[:,1]),1],d_all[~np.isnan(d_all[:,1]),1],e_all[~np.isnan(e_all[:,1]),1],f_all[~np.isnan(f_all[:,1]),1])), delimiter=',', header='Value', comments='')
-
 
 df = 24 - 1 -1 #subtracting one because s = 16 has no data
 alpha = 0.05

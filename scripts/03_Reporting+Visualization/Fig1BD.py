@@ -67,6 +67,10 @@ def print_percentseen_Podvalny():
     percent_seen_scra = pd.read_pickle(data_dir + 'Podvalny_percent_seen_scra.p')
     
     data= [percent_seen_real, percent_seen_scra]
+    df = pd.DataFrame(data).transpose()
+    df.columns = ["percent_seen_real","percent_seen_scra"]
+    df.to_csv(data_dir + "Fig1D_1.csv", index = False)
+
     fig, ax = plt.subplots(1, 1, figsize = (1.4, 2.5))
     
     ax.spines['left'].set_position(('outward', 10))
@@ -120,6 +124,11 @@ def print_percentcorrect_Podvalny():
     xdata = [0, 1, 2.5, 3.5]
     data = [correct_R_real, correct_U_real, 
          correct_R_scra, correct_U_scra]
+
+    df = pd.DataFrame(data).transpose()
+    df.columns = ["correct_R_real","correct_U_real","correct_R_scra","correct_U_scra"]
+    df.to_csv(data_dir + "Fig1D_2.csv", index = False)
+
     fig, ax = plt.subplots(1, 1,figsize = (2.5, 2.5))
     ax.spines['left'].set_position(('outward', 10))
     ax.yaxis.set_ticks_position('left')
@@ -180,7 +189,10 @@ def print_percentseen_correct_Baria():
     percent_seen_catch = loadmat(data_dir + 'Baria_percentseen_catch.mat')['Hitrate_catch'][0,:]
     
     data= [percent_seen_real,percent_seen_catch]
-    
+    df = pd.DataFrame(data).transpose()
+    df.columns = ["percent_seen_real","percent_seen_catch"]
+    df.to_csv(data_dir + "Fig1B_1.csv", index = False)
+
     fig, ax = plt.subplots(1, 1, figsize = (1.4, 2.5))
     
     ax.spines['left'].set_position(('outward', 10))
@@ -231,6 +243,10 @@ def print_percentcorrect_bydetection_Baria():
     
     xdata = [0, 1]
     data = [correct_R_real, correct_U_real]
+    df = pd.DataFrame(data).transpose()
+    df.columns = ["correct_R_real","correct_U_real"]
+    df.to_csv(data_dir + "Fig1B_2.csv", index = False)
+
     fig, ax = plt.subplots(1, 1,figsize = (1.5, 2.5))
     ax.spines['left'].set_position(('outward', 10))
     ax.yaxis.set_ticks_position('left')

@@ -78,6 +78,10 @@ import matplotlib.cm as cm
 colors = cm.Paired(np.linspace(0, 0.9, len(ys)))
 
 names = ['Fig2C_scatter','Fig3B_1_scatter','Fig3B_2_scatter']
+df_1 = pd.DataFrame(columns=['subjID', 'alpha_norm', 'SCPdv'])
+df_2 = pd.DataFrame(columns=['subjID', 'beta_norm', 'SCPdv'])
+df_3 = pd.DataFrame(columns=['subjID', 'beta_norm', 'SCPdv'])
+
 for cluster in range(len(all_clusters)):
     fig, ax = plt.subplots(1, 1, figsize = (4, 2))
     ax.spines['top'].set_visible(False)
@@ -94,10 +98,15 @@ for cluster in range(len(all_clusters)):
             plt.scatter(df_clean['alpha_norm'],df_clean['SCPdv'],alpha=0.5)
             plt.xlabel("normalized alpha power",fontsize=13)
             z = np.polyfit(df_all['alpha_norm'],df_all['SCPdv'],1)
+            df_1 = pd.concat([df_1,df_clean[['subjID','alpha_norm','SCPdv']]])
         else: #Beta clusters
             plt.scatter(df_clean['beta_norm'],df_clean['SCPdv'],alpha=0.5)
             plt.xlabel("normalized beta power",fontsize=13)
             z = np.polyfit(df_all['beta_norm'],df_all['SCPdv'],1)
+            if cluster == 1:
+                df_2 = pd.concat([df_2,df_clean[['subjID','beta_norm','SCPdv']]])
+            elif cluster ==2:
+                df_3 = pd.concat([df_3,df_clean[['subjID','beta_norm','SCPdv']]])
     plt.xlim(0,maxXlim)
     p = np.polyval(z,x_extended)
     plt.plot(x_extended,p,color='black',linewidth=2)
@@ -106,6 +115,11 @@ for cluster in range(len(all_clusters)):
     plt.yticks(fontsize=12)
     plt.savefig(figures_dir + names[cluster] + ".png",dpi=800, bbox_inches='tight',transparent=True)
     plt.clf()
+
+#Save CSVs
+df_1.to_csv(data_dir + names[0] + '.csv', index=False)
+df_2.to_csv(data_dir + names[1] + '.csv', index=False)
+df_3.to_csv(data_dir + names[2] + '.csv', index=False)
 
 # Barplots
 box_style=dict(boxstyle='round', facecolor='wheat', alpha=0.5)
