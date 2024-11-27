@@ -58,6 +58,7 @@ Wvalues_alphabeta = np.zeros((4))
 for corrnum in range(4):
     Wvalues_alphabeta[corrnum],pvalues_alphabeta[corrnum] = wilcoxon(corr_alphabeta_z[corrnum,:])
 
+
 # Barplots
 box_style=dict(boxstyle='round', facecolor='wheat', alpha=0.5)
 colors = {'AlphaC1_high':np.array([164, 210, 255]) / 255., 
@@ -69,10 +70,13 @@ colors = {'AlphaC1_high':np.array([164, 210, 255]) / 255.,
           'BetaC2_low':np.array([255, 102, 102]) / 255.,
           'SCP_pupil':np.array([204, 204, 255]) / 255.}        
 
-
 #Alpha vs. beta clusters
 plt.clf()
 data = [corr_alphabeta_z[0,:],corr_alphabeta_z[1,:],corr_alphabeta_z[2,:],corr_alphabeta_z[3,:]]
+df = pd.DataFrame(data).transpose()
+df.columns = ["alphc1_betac1","alphac1_betac2","alphac2_betac1","alphac2_betac2"]
+df.to_csv(data_dir + "Fig5B.csv", index = False)
+
 fig, ax = plt.subplots(1, 1, figsize = (6, 2.5))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)

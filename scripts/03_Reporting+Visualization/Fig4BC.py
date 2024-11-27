@@ -30,18 +30,21 @@ beta_noSCP_auroc = np.load(data_dir + 'beta_noSCP_auroc.npy')
 SCP_nobeta_auroc = np.load(data_dir + 'SCP_nobeta_auroc.npy')
 
 #Save as CSVs
-Fig4B_1 = pd.DataFrame([SCP_auroc[:,2],SCP_nobeta_auroc[:,2]])
+Fig4B_1 = pd.DataFrame([SCP_auroc[:,2],SCP_nobeta_auroc[:,2]]).transpose()
 Fig4B_1.columns = ["SCP_c1","SCP_resids_c1"]
-Fig4B_2 = pd.DataFrame([beta_auroc[:,2],beta_noSCP_auroc[:2]])
-Fig4B_2.columns = ["beta_c1","beta_resids_c1"]
-Fig4C_1 = pd.DataFrame([SCP_auroc[:,3],SCP_nobeta_auroc[:,3]])
-Fig4C_1.columns = ["SCP_c2","SCP_resids_c2"]
-Fig4C_2 = pd.DataFrame([beta_auroc[:,3],beta_noSCP_auroc[:,3]])
-Fig4C_2.columns = ["beta_c2","beta_resids_c2"]
+Fig4B_1.to_csv(data_dir + "Fig4B_1.csv", index = False)
 
-df = pd.DataFrame(data).transpose()
-    df.columns = ["correct_R_real","correct_U_real","correct_R_scra","correct_U_scra"]
-    df.to_csv(data_dir + "Fig1D_2.csv", index = False)
+Fig4B_2 = pd.DataFrame([beta_auroc[:,2],beta_noSCP_auroc[:2]]).transpose()
+Fig4B_2.columns = ["beta_c1","beta_resids_c1"]
+Fig4B_2.to_csv(data_dir + "Fig4B_2.csv", index = False)
+
+Fig4C_1 = pd.DataFrame([SCP_auroc[:,3],SCP_nobeta_auroc[:,3]]).transpose()
+Fig4C_1.columns = ["SCP_c2","SCP_resids_c2"]
+Fig4C_1.to_csv(data_dir + "Fig4C_1.csv", index = False)
+
+Fig4C_2 = pd.DataFrame([beta_auroc[:,3],beta_noSCP_auroc[:,3]]).transpose()
+Fig4C_2.columns = ["beta_c2","beta_resids_c2"]
+Fig4C_2.to_csv(data_dir + "Fig4C_2.csv", index = False)
 
 #Make bar plots comparing AUROCs across subjects
 box_style=dict(boxstyle='round', facecolor='wheat', alpha=0.5)

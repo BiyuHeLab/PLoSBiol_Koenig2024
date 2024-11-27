@@ -402,6 +402,10 @@ for cluster in range(2):
     
     fig, ax = plt.subplots(1, 1, figsize = (6, 2.5))
     data = np.array([np.delete(a_all[:,cluster],16),np.delete(b_all[:,cluster],16),np.delete(c_all[:,cluster],16),np.delete(d_all[:,cluster],16),np.delete(e_all[:,cluster],16),np.delete(f_all[:,cluster],16)])
+    df = pd.DataFrame(data).transpose()
+    df.columns = ["a","b","c","d","e","f"]
+    df.to_csv(data_dir + names[cluster] + ".csv", index = False)
+
     ax.spines['left'].set_position(('outward', 10))
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -649,6 +653,10 @@ p8 = stats.t.sf(zscore_model2, df)
 
 fig, ax = plt.subplots(1, 1, figsize = (6, 2.5))
 data = np.array([np.delete(a_all,16),np.delete(b_all,16),np.delete(c_all,16),np.delete(d_all,16),np.delete(e_all,16),np.delete(f_all,16)])
+df = pd.DataFrame(data).transpose()
+df.columns = ["a","b","c","d","e","f"]
+df.to_csv(data_dir + "Fig7C.csv", index = False)
+
 ax.spines['left'].set_position(('outward', 10))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
